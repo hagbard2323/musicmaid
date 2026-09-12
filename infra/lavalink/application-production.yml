@@ -1,0 +1,5 @@
+# Authenticated extraction and media playback must share the server's IPv4 address.
+lavalink:
+  server:
+    ratelimit:
+      ipBlocks: []

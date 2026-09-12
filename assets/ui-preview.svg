@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="450" viewBox="0 0 960 450" role="img" aria-labelledby="title desc">
+  <title id="title">MusicMaid controls, schematic preview</title>
+  <desc id="desc">A fictional now-playing card with full controls and a compact older card with an Open current player button. This is an illustration, not a Discord screenshot.</desc>
+  <rect width="960" height="450" rx="20" fill="#18191e"/>
+  <g font-family="system-ui, sans-serif">
+    <text x="28" y="37" font-size="15" fill="#c6b183" font-weight="700" letter-spacing="1.5">MUSICMAID · SCHEMATIC PREVIEW</text>
+    <text x="28" y="64" font-size="13" fill="#a7a8b5">A shared player, with controls that stay easy to reach.</text>
+    <rect x="28" y="88" width="558" height="333" rx="12" fill="#25262e"/>
+    <rect x="28" y="100" width="4" height="309" rx="2" fill="#c6b183"/>
+    <text x="51" y="120" font-size="12" fill="#c6b183" font-weight="700" letter-spacing="1.2">NOW PLAYING</text>
+    <text x="51" y="153" font-size="23" fill="#f5f1e8" font-weight="700">Example track</text>
+    <text x="51" y="178" font-size="14" fill="#b9bac6">Example artist · YouTube · Requested by a member</text>
+    <rect x="51" y="199" width="510" height="5" rx="2.5" fill="#434550"/>
+    <rect x="51" y="199" width="169" height="5" rx="2.5" fill="#c6b183"/>
+    <text x="51" y="225" font-size="12" fill="#b9bac6">1:04 / 3:12</text>
+    <text x="51" y="254" font-size="13" fill="#e0dfe7">Up next: another selected recording</text>
+    <g font-size="13" font-weight="600" text-anchor="middle">
+      <rect x="51" y="273" width="85" height="34" rx="6" fill="#454752"/>
+      <text x="93" y="295" fill="#f5f1e8">Pause</text>
+      <rect x="144" y="273" width="70" height="34" rx="6" fill="#454752"/>
+      <text x="179" y="295" fill="#f5f1e8">Skip</text>
+      <rect x="222" y="273" width="127" height="34" rx="6" fill="#454752"/>
+      <text x="285" y="295" fill="#f5f1e8">Change version</text>
+      <rect x="357" y="273" width="113" height="34" rx="6" fill="#454752"/>
+      <text x="413" y="295" fill="#f5f1e8">Watch video</text>
+      <rect x="51" y="315" width="107" height="34" rx="6" fill="#c6b183"/>
+      <text x="104" y="337" fill="#222127">Add music</text>
+      <rect x="166" y="315" width="76" height="34" rx="6" fill="#454752"/>
+      <text x="204" y="337" fill="#f5f1e8">Queue</text>
+      <rect x="250" y="315" width="85" height="34" rx="6" fill="#454752"/>
+      <text x="292" y="337" fill="#f5f1e8">Playlists</text>
+      <rect x="343" y="315" width="70" height="34" rx="6" fill="#454752"/>
+      <text x="378" y="337" fill="#f5f1e8">Stats</text>
+    </g>
+    <text x="51" y="391" font-size="12" fill="#a7a8b5">Selected recording · shared queue · explicit version correction</text>
+    <rect x="609" y="88" width="323" height="204" rx="12" fill="#25262e"/>
+    <text x="632" y="120" font-size="12" fill="#a7a8b5" font-weight="700" letter-spacing="1.2">EARLIER IN CHAT</text>
+    <text x="632" y="154" font-size="19" fill="#f5f1e8" font-weight="700">Previous track</text>
+    <text x="632" y="179" font-size="14" fill="#b9bac6">Finished · compact history card</text>
+    <rect x="632" y="199" width="208" height="36" rx="6" fill="#454752"/>
+    <text x="736" y="222" text-anchor="middle" font-size="13" font-weight="600" fill="#f5f1e8">Open current player</text>
+    <text x="632" y="266" font-size="12" fill="#a7a8b5">Opens private controls without scrolling.</text>
+    <text x="632" y="333" font-size="14" fill="#c6b183" font-weight="600">Want to move through chat?</text>
+    <text x="632" y="358" font-size="13" fill="#b9bac6">Jump to playing message is separate.</text>
+    <text x="632" y="407" font-size="12" fill="#a7a8b5">Actual Discord layout varies by client.</text>
+  </g>
+</svg>

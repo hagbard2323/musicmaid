@@ -1,0 +1,23 @@
+name: Feature request
+description: Describe the member or operator problem a change would solve.
+title: "[Feature] "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Who needs this, and what are they trying to do?
+      description: Describe a concrete situation and the current workaround.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Include how members correct mistakes or recover when it fails.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and evidence
+      description: Note account requirements, compatibility, relevant public documentation, and how success could be tested. See docs/ROADMAP.md for deferred work.

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>MusicMaid · Watch</title>
+  <link rel="stylesheet" href="/.proxy/app.css">
+</head>
+<body>
+  <main class="viewer">
+    <header>
+      <div class="brand"><span class="brand-mark" aria-hidden="true">♪</span><span>MusicMaid<span class="brand-sub">WATCH TOGETHER</span></span></div>
+      <button id="close" class="quiet" aria-label="Close video viewer">Close <span aria-hidden="true">×</span></button>
+    </header>
+    <section class="stage" aria-label="Current YouTube video">
+      <video id="video" muted playsinline preload="metadata" disablepictureinpicture></video>
+      <div id="overlay" class="overlay" role="status" aria-live="polite">
+        <div class="halo" aria-hidden="true">♪</div>
+        <h1 id="status-title">Your music, in view.</h1>
+        <p id="status-detail">Connecting to MusicMaid…</p>
+        <button id="start" class="primary" hidden>Start video</button>
+      </div>
+      <div class="stage-badge"><span id="dot" class="dot"></span><span id="state-label">Connecting</span><span id="quality"></span></div>
+    </section>
+    <section class="track">
+      <div class="track-meta"><div class="eyebrow">YOUTUBE</div><h2 id="title">Waiting for the current track</h2><p id="artist">Music continues in your voice channel.</p></div>
+      <div class="track-actions"><button id="resync" disabled>Resync</button><button id="fullscreen" disabled>Fullscreen</button><button id="source" class="quiet" disabled>Open source ↗</button></div>
+    </section>
+    <div class="timeline" aria-hidden="true"><div id="progress"></div></div>
+    <footer><span id="time">— / —</span><span class="audio-note">Audio stays with MusicMaid <span aria-hidden="true">·</span> You can close this anytime.</span><details><summary>Video timing</summary><label for="delay">Adjust video to your voice audio</label><input id="delay" type="range" min="-1500" max="1500" step="50" value="0"><output id="delay-value">0 ms</output></details></footer>
+  </main>
+  <script type="module" src="/.proxy/app.js"></script>
+</body>
+</html>

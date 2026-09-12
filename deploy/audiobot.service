@@ -1,0 +1,36 @@
+[Unit]
+Description=MusicMaid audio bot
+After=network-online.target
+Wants=network-online.target lavalink.service
+StartLimitIntervalSec=600
+StartLimitBurst=3
+
+[Service]
+Type=notify
+NotifyAccess=all
+WatchdogSec=60
+WatchdogSignal=SIGTERM
+TimeoutStartSec=90
+TimeoutStopSec=20
+TimeoutAbortSec=20
+LimitCORE=0
+User=botsvc
+Group=botsvc
+WorkingDirectory=/opt/botsvc/audiobot
+StateDirectory=audiobot
+StateDirectoryMode=0700
+Environment=MUSIC_DATABASE_PATH=/var/lib/audiobot/music.sqlite
+Environment=CIPHER_URL=http://127.0.0.1:18001
+UMask=0077
+# Discord controls start independently; the existing recovery loop re-adds Lavalink.
+ExecStart=/usr/bin/node dist/apps/bot/src/index.js
+Restart=always
+RestartSec=10
+# --- sandboxing (safe defaults) ---
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target

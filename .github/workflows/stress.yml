@@ -1,0 +1,45 @@
+name: Fixture stress
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  stress:
+    name: Bounded single-community workload
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24.x"
+          check-latest: true
+          package-manager-cache: false
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Run fixture stress workload
+        run: npm run test:stress -- --seed 20260913 --iterations 1000 --report stress-report.json
+      - name: Publish measured workload summary
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          if [[ -f stress-report.json ]]; then
+            {
+              echo '## Fixture stress results'
+              echo 'This is a disposable local workload, not a live Discord or provider load test.'
+              echo '```json'
+              cat stress-report.json
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi

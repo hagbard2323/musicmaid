@@ -1,0 +1,10 @@
+// MusicMaid may only restart its fixed audio and optional viewer services. No start/stop of
+// arbitrary units, unit-file changes, shell commands, or passwordless sudo.
+polkit.addRule(function(action, subject) {
+    if (subject.user === "botsvc" &&
+        action.id === "org.freedesktop.systemd1.manage-units" &&
+        action.lookup("verb") === "restart" &&
+        ["lavalink.service", "audiobot-cipher.service", "audiobot-viewer.service"].indexOf(action.lookup("unit")) !== -1) {
+        return polkit.Result.YES;
+    }
+});

@@ -1,0 +1,24 @@
+services:
+  cipher:
+    image: ghcr.io/kikkia/yt-cipher@sha256:4c5ec381ff57336cfc24822d2b526a5ad7cd0171f61065a1bbc87bb736842449
+    container_name: audiobot-cipher
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      HOST: "127.0.0.1"
+      PORT: "18001"
+      MAX_THREADS: "2"
+      OVERRIDE_PLAYER_VARIANT: "IAS"
+  lavalink:
+    image: ghcr.io/lavalink-devs/lavalink:4.2.2
+    container_name: audiobot-lavalink
+    restart: unless-stopped
+    network_mode: host
+    depends_on:
+      - cipher
+    environment:
+      SERVER_PORT: "2333"
+      LAVALINK_SERVER_PASSWORD: "${LAVALINK_AUTH:-youshallnotpass}"
+    volumes:
+      - ./infra/lavalink/application.yml:/opt/Lavalink/application.yml:ro,Z
+      - ./logs/lavalink:/opt/Lavalink/logs:Z

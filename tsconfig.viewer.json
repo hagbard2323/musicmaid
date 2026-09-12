@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "module": "ESNext", "moduleResolution": "Bundler", "lib": ["ES2022", "DOM"], "types": [], "noEmit": true },
+  "include": ["apps/viewer/src/**/*.ts", "apps/bot/src/video/protocol.ts"]
+}

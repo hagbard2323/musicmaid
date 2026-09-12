@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "scope": "offline one-community fixture; no Discord connection, provider calls or audible playback",
+  "seed": 20260913,
+  "iterations": 1000,
+  "durationMs": 21465,
+  "environment": {
+    "node": "v24.18.0",
+    "platform": "linux",
+    "arch": "x64",
+    "logicalCpus": 12,
+    "cpuModel": "Intel(R) Core(TM) i5-10400F CPU @ 2.90GHz",
+    "totalMemoryBytes": 16611926016,
+    "temporaryDatabaseFilesystem": {
+      "type": "btrfs",
+      "magicHex": "0x9123683e",
+      "meaning": "Filesystem containing this temporary SQLite database, not a hosted capacity estimate."
+    }
+  },
+  "workload": {
+    "upcomingQueueSize": 500,
+    "savedPlaylistSize": 500,
+    "rejectedPlaylistSize": 501,
+    "concurrentInitialBatches": 25,
+    "tracksPerBatch": 20,
+    "fullQueueRejections": 16,
+    "acceptedRequests": 661,
+    "backendStarts": 194,
+    "fixtureInteractions": 400
+  },
+  "latencyMs": {
+    "concurrent_20_track_batch": {
+      "count": 25,
+      "p50": 69.564,
+      "p95": 178.777,
+      "max": 178.836
+    },
+    "full_queue_rejection": {
+      "count": 16,
+      "p50": 13.963,
+      "p95": 26.42,
+      "max": 26.42
+    },
+    "concurrent_duplicate_skip_and_enqueue": {
+      "count": 160,
+      "p50": 26.414,
+      "p95": 32.632,
+      "max": 38.882
+    },
+    "volume_control": {
+      "count": 174,
+      "p50": 10.607,
+      "p95": 12.923,
+      "max": 20.453
+    },
+    "progress_checkpoint": {
+      "count": 272,
+      "p50": 14.503,
+      "p95": 21.936,
+      "max": 44.178
+    },
+    "seek_control": {
+      "count": 107,
+      "p50": 11.894,
+      "p95": 16.177,
+      "max": 19.933
+    },
+    "queue_mode": {
+      "count": 164,
+      "p50": 9.863,
+      "p95": 14.531,
+      "max": 21.967
+    },
+    "pause_control": {
+      "count": 84,
+      "p50": 13.247,
+      "p95": 16.889,
+      "max": 20.551
+    },
+    "resume_control": {
+      "count": 39,
+      "p50": 11.587,
+      "p95": 14.82,
+      "max": 18.842
+    }
+  },
+  "fixtureInteractions": {
+    "deferCallbackMs": {
+      "count": 400,
+      "p50": 1.781,
+      "p95": 2.04,
+      "max": 3.265
+    },
+    "completeHandlerMs": {
+      "count": 400,
+      "p50": 21.062,
+      "p95": 25.725,
+      "max": 31.153
+    },
+    "localDeferBudgetMs": 3000,
+    "localDeferBudgetPassed": true,
+    "meaning": "Local handle() entry to stub deferReply(); NOT real Discord acknowledgment latency. Gateway/network delay excluded."
+  },
+  "eventLoopLagMs": {
+    "p50": 17.973247,
+    "p95": 49.086463,
+    "max": 305.397759,
+    "resolution": 10
+  },
+  "memoryBytes": {
+    "beforeRss": 124993536,
+    "peakRss": 253485056,
+    "afterRss": 248766464,
+    "beforeHeapUsed": 28123696,
+    "peakHeapUsed": 100621192,
+    "afterHeapUsed": 61510784,
+    "garbageCollectionForced": false
+  },
+  "cleanup": {
+    "activeBackendAttempts": 0,
+    "pendingGuildActions": 0,
+    "controllerClosed": true,
+    "temporaryDatabaseRemoved": true,
+    "blockedNetworkCalls": 0
+  },
+  "fixtureIncidentEvents": 194,
+  "limitations": [
+    "Synthetic backend resolves immediately; excludes real decoder/voice/provider cost.",
+    "Measured on this machine and filesystem; not a hosted capacity or availability guarantee.",
+    "Competing-writer SQLite faults are covered separately by targeted tests.",
+    "State-machine randomized fault tests run in npm test; this command measures a bounded full-queue workload."
+  ]
+}

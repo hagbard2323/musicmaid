@@ -1,0 +1,20 @@
+[Unit]
+Description=MusicMaid YouTube cipher service
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+ContainerName=audiobot-cipher
+Image=ghcr.io/kikkia/yt-cipher@sha256:4c5ec381ff57336cfc24822d2b526a5ad7cd0171f61065a1bbc87bb736842449
+Network=host
+Environment=HOST=127.0.0.1
+Environment=PORT=18001
+Environment=MAX_THREADS=2
+Environment=OVERRIDE_PLAYER_VARIANT=IAS
+
+[Service]
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

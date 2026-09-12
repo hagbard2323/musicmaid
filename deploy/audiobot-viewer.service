@@ -1,0 +1,31 @@
+[Unit]
+Description=MusicMaid optional YouTube viewer
+After=network-online.target audiobot.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=musicmaid-viewer
+Group=musicmaid-viewer
+WorkingDirectory=/opt/musicmaid-viewer
+EnvironmentFile=/etc/audiobot-viewer.env
+Environment=NODE_ENV=production
+Environment=NODE_OPTIONS=--dns-result-order=ipv4first
+ExecStart=/usr/bin/node dist/apps/viewer-server/src/index.js
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=10
+MemoryHigh=160M
+MemoryMax=256M
+TasksMax=64
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET
+
+[Install]
+WantedBy=multi-user.target

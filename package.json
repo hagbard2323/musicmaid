@@ -1,0 +1,38 @@
+{
+  "name": "musicmaid",
+  "version": "0.1.0-beta.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch apps/bot/src/index.ts",
+    "start": "node dist/apps/bot/src/index.js",
+    "build": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\" && tsc -p tsconfig.json && tsc -p tsconfig.viewer.json && node scripts/build-viewer.mjs && node scripts/release-manifest.mjs",
+    "check": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.viewer.json",
+    "test": "DISCORD_TOKEN=test DISCORD_CLIENT_ID=test node --import tsx scripts/test.mjs",
+    "test:stress": "DISCORD_TOKEN=test DISCORD_CLIENT_ID=test node --import tsx scripts/stress.mjs",
+    "lavalink:up": "docker compose up lavalink",
+    "lavalink:down": "docker compose down"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dependencies": {
+    "@discord/embedded-app-sdk": "2.5.0",
+    "discord.js": "14.27.0",
+    "dotenv": "^16.4.7",
+    "shoukaku": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "esbuild": "0.28.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "ws": "8.21.0"
+  },
+  "license": "MIT",
+  "description": "A self-hosted Discord music bot with recording-aware playback and recoverable queues.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hagbard2323/musicmaid.git"
+  }
+}

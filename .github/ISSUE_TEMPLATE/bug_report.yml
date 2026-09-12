@@ -1,0 +1,33 @@
+name: Bug report
+description: A reproducible installation, playback, library or viewer failure.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "For security issues, follow SECURITY.md. Never include tokens, cookies, callback URLs, signed media URLs, database dumps or unfiltered logs."
+  - type: input
+    id: revision
+    attributes:
+      label: Installed revision
+      description: Copy the revision from /music-admin status, or identify the checkout if installation failed.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS/version, architecture, enabled sources, optional viewer, and Discord desktop/web/mobile.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected result and actual result
+      description: For matching issues, include public requested/selected track links and recording details. For interruptions, include elapsed time.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Safe diagnostic evidence
+      description: Incident ID, short sanitized Doctor result, frequency, and whether another member reproduces it. Do not attach raw service logs.

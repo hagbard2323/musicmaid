@@ -1,0 +1,20 @@
+[Unit]
+Description=Lavalink audio node (MusicMaid)
+After=network-online.target audiobot-cipher.service
+Wants=network-online.target audiobot-cipher.service
+
+[Container]
+ContainerName=audiobot-lavalink
+Image=ghcr.io/lavalink-devs/lavalink:4.2.2
+Network=host
+Volume=/opt/lavalink/application.yml:/opt/Lavalink/application.yml:ro,Z
+Volume=/opt/lavalink/application-production.yml:/opt/Lavalink/application-production.yml:ro,Z
+Environment=SPRING_PROFILES_ACTIVE=production
+Environment=JAVA_TOOL_OPTIONS=-Djava.net.preferIPv4Stack=true
+
+[Service]
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
