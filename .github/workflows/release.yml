@@ -1,0 +1,52 @@
+name: Publish checked beta
+
+on:
+  push:
+    tags: ["v*-beta.*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: beta-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - name: Check out the tagged source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Require successful main-branch CI for this exact commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+-beta\.[0-9]+$ ]]
+          result="$(gh api --method GET "repos/$GH_REPO/actions/workflows/ci.yml/runs" -f head_sha="$GITHUB_SHA" -f event=push -f per_page=100 --jq '[.workflow_runs[] | select(.head_branch == "main")][0] | if .status == "completed" and .conclusion == "success" then "success" else "not-ready" end')"
+          if [[ "$result" != success ]]; then
+            echo 'Release refused: this exact commit needs successful main-branch CI before its beta tag is published.' >&2
+            exit 1
+          fi
+      - name: Publish the beta release notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo 'This release already exists; leaving it unchanged.'
+            exit 0
+          fi
+          gh release create "$RELEASE_TAG" --verify-tag --prerelease --latest=false --title "MusicMaid $RELEASE_TAG" --notes-file RELEASE-NOTES.md
