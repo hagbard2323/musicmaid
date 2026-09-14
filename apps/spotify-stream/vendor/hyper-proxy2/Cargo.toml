@@ -1,0 +1,53 @@
+# Vendored from https://github.com/siketyan/hyper-proxy2 at commit
+# 2a1a9845f4c9a100c45bf3dc0f1222773d5a33b7 (MIT, license retained in LICENSE-MIT.md).
+# src/ is unchanged. Manifest changes against upstream:
+#   - default features off on tokio-rustls and hyper-rustls; ring (and tls12 on hyper-rustls)
+#     enabled explicitly so rustls uses ring only
+#   - unused optional dependencies webpki and rustls-native-certs removed
+#   - readme and [dev-dependencies] dropped
+# Remove this copy when upstream publishes a release on hyper-rustls 0.27 or
+# librespot stops depending on hyper-proxy2.
+
+[package]
+name = "hyper-proxy2"
+version = "0.1.0"
+authors = ["Natsuki Ikeguchi <me@s6n.jp>"]
+description = "A proxy connector for Hyper-based applications"
+documentation = "https://docs.rs/hyper-proxy2"
+repository = "https://github.com/siketyan/hyper-proxy2"
+keywords = ["hyper", "proxy", "tokio", "ssl"]
+categories = ["web-programming::http-client", "asynchronous", "authentication"]
+license = "MIT"
+edition = "2021"
+rust-version = "1.70.0"
+
+[dependencies]
+tokio = { version = "1.35", features = ["io-std", "io-util"] }
+hyper = { version = "1.0", features = ["client"] }
+hyper-util = { version = "0.1.2", features = ["client", "client-legacy", "tokio"] }
+
+tower-service = "0.3.2"
+http = "1.0"
+futures-util = { version = "0.3.30", default-features = false }
+bytes = "1.5"
+pin-project-lite = "0.2.13"
+hyper-tls = { version = "0.6.0", optional = true }
+tokio-native-tls = { version = "0.3.1", optional = true }
+native-tls = { version = "0.2.11", optional = true }
+openssl = { version = "0.10.62", optional = true }
+tokio-openssl = { version = "0.6.4", optional = true }
+tokio-rustls = { version = "0.26.0", default-features = false, optional = true }
+hyper-rustls = { version = "0.27.0", default-features = false, optional = true }
+
+webpki-roots = { version = "1.0.3", optional = true }
+headers = "0.4"
+
+[features]
+openssl-tls = ["openssl", "tokio-openssl"]
+tls = ["tokio-native-tls", "hyper-tls", "native-tls"]
+# note that `rustls-base` is not a valid feature on its own - it will configure rustls without root
+# certificates!
+rustls-base = ["tokio-rustls", "hyper-rustls", "hyper-rustls/ring", "tokio-rustls/ring", "hyper-rustls/tls12"]
+rustls = ["rustls-base", "hyper-rustls/native-tokio"]
+rustls-webpki = ["rustls-base", "webpki-roots", "hyper-rustls/webpki-tokio"]
+default = ["tls"]

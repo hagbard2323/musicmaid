@@ -11,9 +11,11 @@ catalogs, recordings, trademarks, or third-party services.
   [its upstream license](apps/spotify-stream/LIBRESPOT-LICENSE),
   [dependency inventory](apps/spotify-stream/DEPENDENCIES.md), and
   [Cargo lockfile](apps/spotify-stream/Cargo.lock) with the source. The inventory
-  reports declared licenses; it is not a replacement for their terms. Binary
-  redistribution requires the corresponding dependency notices and obligations.
-  This beta distributes helper source, not a precompiled helper.
+  reports declared licenses; it is not a replacement for their terms. The
+  vendored hyper-proxy2 connector keeps
+  [its MIT license](apps/spotify-stream/vendor/hyper-proxy2/LICENSE-MIT.md).
+  Binary redistribution requires the corresponding dependency notices and
+  obligations. This beta distributes helper source, not a precompiled helper.
 - Lavalink, yt-cipher, yt-dlp and optional system packages are separately
   installed upstream components. Their versions are specified by the installer
   and infrastructure files; their respective licenses continue to apply.

@@ -5,6 +5,15 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 3
+    # Review these major migrations together with their runtime/configuration
+    # changes. SemVer update-type ignores do not suppress security updates.
+    ignore:
+      # Match the oldest supported runtime in the Node 22/24 CI matrix.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      # dotenv 17 enables startup logging by default; retain the quiet v16 setup.
+      - dependency-name: "dotenv"
+        update-types: ["version-update:semver-major"]
     groups:
       development:
         dependency-type: development

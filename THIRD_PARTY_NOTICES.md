@@ -8,7 +8,7 @@ See [NOTICE.md](NOTICE.md) for the included artwork and generated test fixture.
 | Component | Recorded inputs and notices |
 | --- | --- |
 | Node application, Discord libraries and viewer build | `package.json`, `package-lock.json`; preserve each installed package's license/notice files when distributing dependencies or bundles. |
-| Optional Rust Spotify helper | `apps/spotify-stream/Cargo.toml`, `Cargo.lock`, [dependency inventory](apps/spotify-stream/DEPENDENCIES.md), and the retained [librespot MIT license](apps/spotify-stream/LIBRESPOT-LICENSE). |
+| Optional Rust Spotify helper | `apps/spotify-stream/Cargo.toml`, `Cargo.lock`, [dependency inventory](apps/spotify-stream/DEPENDENCIES.md), and the retained [librespot MIT license](apps/spotify-stream/LIBRESPOT-LICENSE). The vendored hyper-proxy2 connector under `apps/spotify-stream/vendor/hyper-proxy2` (upstream commit `2a1a9845f4c9a100c45bf3dc0f1222773d5a33b7`, sources unchanged, manifest adjusted) keeps its [MIT license](apps/spotify-stream/vendor/hyper-proxy2/LICENSE-MIT.md). |
 | Lavalink, plugins and cipher service | Image/plugin references in `infra/lavalink/` and `deploy/`; upstream projects retain their respective licenses. |
 | YouTube extractor and supporting tools | Pinned inputs under `deploy/`; downloaded packages retain their own licenses. |
 

@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 const hash = bytes => createHash("sha256").update(bytes).digest("hex");
 const rootFiles = ["package.json", "package-lock.json", "tsconfig.json", "tsconfig.viewer.json", "docker-compose.yml",
   "apps/viewer/index.html", "apps/spotify-stream/Cargo.toml", "apps/spotify-stream/Cargo.lock", "bin/SHA256SUMS"];
-const directories = ["apps/bot/src", "apps/viewer/src", "apps/viewer-server/src", "apps/spotify-stream/src", "scripts", "deploy", "infra"];
+const directories = ["apps/bot/src", "apps/viewer/src", "apps/viewer-server/src", "apps/spotify-stream/src", "apps/spotify-stream/vendor", "scripts", "deploy", "infra"];
 
 /** Stable across git archives, platforms and directory enumeration order. */
 export function sourceInputs(root) {

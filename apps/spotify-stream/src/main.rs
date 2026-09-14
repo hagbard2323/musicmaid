@@ -94,8 +94,15 @@ async fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use librespot::core::http_client::HttpClient;
     #[test] fn request_rejects_urls_and_missing_auth() {
         let mut r = Request { track_id: "0NTMtAO2BV4tnGvw9EgBVq".into(), access_token: "test".into(), device_id: "device".into(), expected_duration_ms: 219305, start_ms: 0 };
         assert!(validate(&r).is_ok()); r.track_id = "https://localhost".into(); assert!(validate(&r).is_err());
+    }
+    // Builds both rustls client configurations (hyper-rustls and the vendored proxy connector) from the host CA store; a second rustls crypto provider would panic here before any I/O.
+    #[tokio::test] async fn http_client_builds_tls_configuration_without_a_provider_panic() {
+        let client = HttpClient::new(None);
+        let request = http::Request::get("http://127.0.0.1:9/").body(bytes::Bytes::new()).unwrap();
+        assert!(client.request_fut(request).is_ok());
     }
 }

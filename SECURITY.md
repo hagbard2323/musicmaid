@@ -18,6 +18,14 @@ reproduction using synthetic data or your own isolated installation. Identify
 whether the issue crosses a member/moderator, service-account, viewer or host
 boundary. Never test against another operator's bot without authorization.
 
+## Dependency advisories
+
+Dependabot alerts are enabled for this repository. CI audits the optional Rust
+helper's locked dependencies against the RustSec database; a vulnerability fails
+the job. Advisories accepted rather than fixed are recorded with their reasons in
+[the audit configuration](apps/spotify-stream/.cargo/audit.toml). If a dependency
+issue is exploitable in MusicMaid as deployed, report it the same private way.
+
 ## Operator responsibilities
 
 Keep `.env`, `.setup/`, provider sessions/grants, databases and backups private.

@@ -2,7 +2,8 @@
 
 Locked dependency metadata for the Linux helper build. Source versions and
 checksums are recorded in `Cargo.lock`; declared licenses and repository links
-are listed below.
+are listed below. `hyper-proxy2` is vendored under `vendor/` from an upstream
+commit with its license retained (see [README.md](README.md)).
 
 | Package | Version | Declared license | Repository |
 | --- | --- | --- | --- |
@@ -94,7 +95,6 @@ are listed below.
 | httpdate | 1.0.3 | MIT OR Apache-2.0 | https://github.com/pyfisch/httpdate |
 | hyper | 1.11.1 | MIT | https://github.com/hyperium/hyper |
 | hyper-proxy2 | 0.1.0 | MIT | https://github.com/siketyan/hyper-proxy2 |
-| hyper-rustls | 0.26.0 | Apache-2.0 OR ISC OR MIT | https://github.com/rustls/hyper-rustls |
 | hyper-rustls | 0.27.9 | Apache-2.0 OR ISC OR MIT | https://github.com/rustls/hyper-rustls |
 | hyper-util | 0.1.20 | MIT | https://github.com/hyperium/hyper-util |
 | iana-time-zone | 0.1.65 | MIT OR Apache-2.0 | https://github.com/strawlab/iana-time-zone |
@@ -155,7 +155,6 @@ are listed below.
 | ogg | 0.9.2 | BSD-3-Clause | https://github.com/RustAudio/ogg |
 | once_cell | 1.21.4 | MIT OR Apache-2.0 | https://github.com/matklad/once_cell |
 | open | 5.4.4 | MIT | https://github.com/Byron/open-rs |
-| openssl-probe | 0.1.6 | MIT/Apache-2.0 | https://github.com/alexcrichton/openssl-probe |
 | openssl-probe | 0.2.1 | MIT OR Apache-2.0 | https://github.com/rustls/openssl-probe |
 | parking_lot | 0.12.5 | MIT OR Apache-2.0 | https://github.com/Amanieu/parking_lot |
 | parking_lot_core | 0.9.12 | MIT OR Apache-2.0 | https://github.com/Amanieu/parking_lot |
@@ -200,13 +199,9 @@ are listed below.
 | rustc-hash | 2.1.3 | Apache-2.0 OR MIT | https://github.com/rust-lang/rustc-hash |
 | rustix | 0.38.44 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | https://github.com/bytecodealliance/rustix |
 | rustix | 1.1.4 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | https://github.com/bytecodealliance/rustix |
-| rustls | 0.22.4 | Apache-2.0 OR ISC OR MIT | https://github.com/rustls/rustls |
-| rustls | 0.23.44 | Apache-2.0 OR ISC OR MIT | https://github.com/rustls/rustls |
-| rustls-native-certs | 0.7.3 | Apache-2.0 OR ISC OR MIT | https://github.com/rustls/rustls-native-certs |
+| rustls | 0.23.45 | Apache-2.0 OR ISC OR MIT | https://github.com/rustls/rustls |
 | rustls-native-certs | 0.8.4 | Apache-2.0 OR ISC OR MIT | https://github.com/rustls/rustls-native-certs |
-| rustls-pemfile | 2.2.0 | Apache-2.0 OR ISC OR MIT | https://github.com/rustls/pemfile |
 | rustls-pki-types | 1.15.1 | MIT OR Apache-2.0 | https://github.com/rustls/pki-types |
-| rustls-webpki | 0.102.8 | ISC | https://github.com/rustls/webpki |
 | rustls-webpki | 0.103.15 | ISC | https://github.com/rustls/webpki |
 | rustversion | 1.0.23 | MIT OR Apache-2.0 | https://github.com/dtolnay/rustversion |
 | ryu | 1.0.23 | Apache-2.0 OR BSL-1.0 | https://github.com/dtolnay/ryu |
@@ -262,7 +257,6 @@ are listed below.
 | tinyvec_macros | 0.1.1 | MIT OR Apache-2.0 OR Zlib | https://github.com/Soveu/tinyvec_macros |
 | tokio | 1.53.1 | MIT | https://github.com/tokio-rs/tokio |
 | tokio-macros | 2.7.2 | MIT | https://github.com/tokio-rs/tokio |
-| tokio-rustls | 0.25.0 | MIT/Apache-2.0 | https://github.com/rustls/tokio-rustls |
 | tokio-rustls | 0.26.5 | MIT OR Apache-2.0 | https://github.com/rustls/tokio-rustls |
 | tokio-stream | 0.1.19 | MIT | https://github.com/tokio-rs/tokio |
 | tokio-tungstenite | 0.28.0 | MIT | https://github.com/snapview/tokio-tungstenite |
@@ -290,7 +284,6 @@ are listed below.
 | version_check | 0.9.5 | MIT/Apache-2.0 | https://github.com/SergioBenitez/version_check |
 | want | 0.3.1 | MIT | https://github.com/seanmonstar/want |
 | web-time | 1.1.0 | MIT OR Apache-2.0 | https://github.com/daxpedda/web-time |
-| webpki | 0.22.4 | See package source | https://github.com/briansmith/webpki |
 | webpki-roots | 1.0.9 | CDLA-Permissive-2.0 | https://github.com/rustls/webpki-roots |
 | which | 4.4.2 | MIT | https://github.com/harryfei/which-rs.git |
 | writeable | 0.6.4 | Unicode-3.0 | https://github.com/unicode-org/icu4x |

@@ -36,6 +36,11 @@ under the runtime account, and enables the candidate settings only after success
 Activation can briefly restart the bot. Pair again through Sources if access is
 revoked or you change accounts; repeated restarts cannot renew consent.
 
+The update flow does not rebuild the helper. After `./scripts/setup.sh update`,
+repeat the **Original Spotify audio** step in Sources to rebuild and verify it
+from the new revision; until then the installed binary keeps the previous
+library versions.
+
 ## Use and verify
 
 Paste a Spotify track link into Add music. When original audio is enabled, the
