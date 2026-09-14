@@ -1,21 +1,27 @@
-MusicMaid's first public source beta targets one self-hosted Discord community
-per installation, with a guided AlmaLinux 10 x86_64 setup.
+MusicMaid 0.1.0-beta.2 is a security-maintenance release for the optional Rust
+Spotify helper. Four Dependabot advisories against rustls-webpki 0.102.8 were
+reachable only through hyper-proxy2 0.1.0's pinned rustls 0.22; that connector
+is now vendored under `apps/spotify-stream/vendor` (upstream sources unchanged,
+MIT retained) so the helper builds a single rustls 0.23 / rustls-webpki 0.103
+stack. The affected TLS path is used only with a configured HTTPS proxy, which
+the helper never sets. CI now audits the helper's locked dependencies against
+the RustSec database with pinned cargo-audit, the vendored copy is part of the
+release source hash, rustls moves to 0.23.45 (RUSTSEC-2026-0285), and the tsx
+and ws dependencies were updated. Application behavior is unchanged; see
+`CHANGELOG.md`.
 
-It includes recording-aware playback, persistent FIFO/fair queues, saved
-playlists, charts, moderator recovery, diagnostic downloads and optional
-synchronized YouTube viewing. Source support and account access have explicit
-limitations; see the README and `docs/SOURCES.md`.
+Operators who enabled original Spotify audio: the update flow does not rebuild
+the helper. After `./scripts/setup.sh update`, run `./scripts/setup.sh sources`
+and repeat the **Original Spotify audio** step to rebuild and verify it.
+Otherwise the installed binary keeps the previous library versions.
 
-Validation: 326 application regressions on Node 22 and 24, 140 installer fixtures,
-the locked Rust helper test, and a reproducible 1,000-operation full-queue workload.
-Independent fresh-owner setup, extended listening and real mobile acceptance
-remain open. This is a beta, with no availability guarantee.
+Validation: the application regressions on Node 22 and 24, the installer
+fixtures, the locked Rust helper build and tests, and the RustSec audit pass.
+The limitations recorded for beta.1 carry over: independent fresh-owner setup,
+extended listening and real mobile acceptance remain open, and there is no
+availability guarantee.
 
 Install from a Git checkout of this tag using `docs/SELF-HOSTING.md`; the installer
-needs Git provenance for its clean-release check. GitHub's automatically generated
-source archives are useful for source review but lack that checkout metadata.
-No compiled helper or media catalog is distributed by this release.
-
-Code, documentation and approved project artwork use MIT. Dependency licenses
-and provider/media permissions remain separate. Voice requests and Release Radar
-are deferred.
+needs Git provenance for its clean-release check. No compiled helper or media
+catalog is distributed. Code, documentation and approved artwork use MIT;
+dependency licenses and provider/media permissions remain separate.

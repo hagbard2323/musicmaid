@@ -11,5 +11,16 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 tokio = { version = "1", features = ["macros", "rt-multi-thread", "time"] }
 
+[dev-dependencies]
+bytes = "1"
+http = "1"
+
+[patch.crates-io]
+# hyper-proxy2 0.1.0 (the only published version) pins rustls 0.22, whose rustls-webpki 0.102
+# dependency carries open RustSec advisories (and rustls-pemfile 2.2, now unmaintained). The
+# vendored copy is upstream's TLS update with default crypto features disabled so the helper
+# keeps one rustls provider (ring). See README.md, "Vendored proxy connector".
+hyper-proxy2 = { path = "vendor/hyper-proxy2" }
+
 [profile.release]
 strip = true

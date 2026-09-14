@@ -9,10 +9,10 @@ A self-hosted Discord music bot for one community, with recording selection,
 durable queues, saved playlists, moderator recovery and optional synchronized
 YouTube video.
 
-**0.1.0-beta.1 · 2026-09-13.** The supported self-hosted installer targets
+**0.1.0-beta.2 · 2026-09-14.** The supported self-hosted installer targets
 **AlmaLinux 10 on x86_64**, using your own Discord application and provider
-accounts. Automated checks and an AlmaLinux VM installation/recovery exercise
-have passed. Independent account setup, extended listening and member/mobile
+accounts. Automated checks pass; the AlmaLinux VM installation/recovery exercise
+was run for beta.1, and beta.2 changes only the helper dependency tree and CI. Independent account setup, extended listening and member/mobile
 acceptance remain open. See [validation](docs/VALIDATION.md) for the evidence and
 its limits. There is no shared hosted service or uptime guarantee.
 

@@ -29,7 +29,7 @@ FILES = ('/etc/systemd/system/audiobot.service', '/etc/containers/systemd/lavali
          '/etc/containers/systemd/audiobot-cipher.container', '/etc/polkit-1/rules.d/50-audiobot-restart.rules', LAVA_ENV)
 ROOT_INPUTS = ('package.json', 'package-lock.json', 'tsconfig.json', 'tsconfig.viewer.json', 'docker-compose.yml',
                'apps/viewer/index.html', 'apps/spotify-stream/Cargo.toml', 'apps/spotify-stream/Cargo.lock', 'bin/SHA256SUMS')
-SOURCE_DIRS = ('apps/bot/src', 'apps/viewer/src', 'apps/viewer-server/src', 'apps/spotify-stream/src', 'scripts', 'deploy', 'infra')
+SOURCE_DIRS = ('apps/bot/src', 'apps/viewer/src', 'apps/viewer-server/src', 'apps/spotify-stream/src', 'apps/spotify-stream/vendor', 'scripts', 'deploy', 'infra')
 
 
 class SetupError(RuntimeError):

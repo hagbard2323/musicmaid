@@ -40,6 +40,24 @@ compiles and tests that locked source with Rust 1.96.1, without provider credent
 cargo test --locked --manifest-path apps/spotify-stream/Cargo.toml
 ```
 
+CI also audits that locked tree against the RustSec database with cargo-audit
+0.22.2. Run the same check from the helper directory:
+
+```bash
+cd apps/spotify-stream && cargo audit
+```
+
+Vulnerabilities fail the job; warnings only print. Every entry in
+[`apps/spotify-stream/.cargo/audit.toml`](apps/spotify-stream/.cargo/audit.toml)
+needs a reason and the condition under which it is removed. The vendored
+connector under `apps/spotify-stream/vendor/hyper-proxy2` keeps its `src/`
+identical to the upstream commit recorded in
+[third-party notices](THIRD_PARTY_NOTICES.md); only its manifest differs.
+Because librespot pins several crates, a new advisory against one of them fails
+CI until the lock is updated or an accepted entry with a reason is added; the
+advisory database is fetched live, so an unchanged commit can turn red later and
+a beta tag then needs a green rerun of that commit's CI first.
+
 The separate [manual stress workflow](.github/workflows/stress.yml) exercises a
 bounded single-community fixture workload and writes its measured report. To run
 the same workload locally after installing dependencies:

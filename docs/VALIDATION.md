@@ -27,9 +27,10 @@ maintenance locks, inactive services and rollback preserving refreshed grants.
 Tests use fixtures, temporary databases, local sockets, subprocesses and mocked
 service actions. They do not log a bot into Discord or authorize a provider account.
 Baseline CI also compiles and tests the optional Spotify helper's locked Rust
-source with Rust 1.96.1. Its single account-free Rust regression passed locally
-during public preparation; the exact public revision's hosted CI result must be
-observed separately.
+source with Rust 1.96.1, and audits that locked tree against the RustSec
+advisory database with pinned cargo-audit. Its account-free Rust regressions
+passed locally during public preparation; the exact public revision's hosted CI
+result must be observed separately.
 
 A separate manually dispatched fixture-stress workflow runs a seeded, bounded
 single-community workload and reports measurements. It is not a live Discord or

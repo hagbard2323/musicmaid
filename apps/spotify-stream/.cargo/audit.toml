@@ -1,0 +1,23 @@
+# Accepted RustSec advisories for the locked helper build. CI runs `cargo audit` from this
+# directory, so this file applies to Cargo.lock next to it and nothing else. Every entry needs
+# a reason it cannot be fixed here, why its impact is bounded, and the trigger that removes it.
+
+[advisories]
+ignore = [
+    # rsa 0.9.10 (Marvin timing side channel; no fixed release exists). librespot-core pins rsa 0.9
+    # at the git revision in Cargo.toml. It is used only in connection/handshake.rs to verify the
+    # access point's Diffie-Hellman key signature against a built-in public key; the advisory
+    # concerns private-key operations, which the helper never performs. Drop when the librespot
+    # pin moves to a release with a fixed rsa.
+    "RUSTSEC-2023-0071",
+    # quick-xml 0.38.4 (quadratic duplicate-attribute check; fixed in 0.41). librespot-core pins
+    # quick-xml 0.38. It parses only the ProductInfo XML that Spotify's access point sends over the
+    # authenticated session, inside a short-lived helper process, and never iterates attributes or
+    # uses NsReader, the only affected code paths. Drop when the librespot pin moves to a release on
+    # quick-xml >= 0.41.
+    "RUSTSEC-2026-0194",
+    # quick-xml 0.38.4 (unbounded namespace allocation in NsReader; fixed in 0.41). Same pin and
+    # exposure as above; librespot-core uses the plain Reader, not NsReader. Drop when the
+    # librespot pin moves to a release on quick-xml >= 0.41.
+    "RUSTSEC-2026-0195",
+]

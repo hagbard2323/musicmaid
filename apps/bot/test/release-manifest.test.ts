@@ -18,7 +18,8 @@ function fixture() {
   const files: Record<string, string> = {
     'package.json': '{"name":"fixture","private":true}', 'package-lock.json': '{"name":"fixture","lockfileVersion":3}',
     'apps/bot/src/index.ts': 'export const release = "fixture";\n', 'scripts/example.sh': '#!/bin/bash\ntrue\n',
-    'infra/lavalink/application.yml': 'server:\n  port: 2333\n', 'bin/SHA256SUMS': 'fixture-helper-checksum\n'
+    'infra/lavalink/application.yml': 'server:\n  port: 2333\n', 'bin/SHA256SUMS': 'fixture-helper-checksum\n',
+    'apps/spotify-stream/vendor/hyper-proxy2/src/lib.rs': '// vendored fixture\n'
   };
   for (const [name, value] of Object.entries(files)) { const path = join(root, name); mkdirSync(join(path, '..'), { recursive: true }); writeFileSync(path, value); }
   git(root, 'init', '-q'); git(root, 'add', '.'); git(root, 'commit', '-qm', 'Fixture release');
@@ -57,8 +58,8 @@ test('archive rebuild preserves provenance instead of inventing a checkout revis
   } finally { f.close(); }
 });
 
-test('altered archived source, audio deployment configuration, helper checksum and dependency lock fail validation', () => {
-  for (const input of ['apps/bot/src/index.ts', 'infra/lavalink/application.yml', 'bin/SHA256SUMS', 'package-lock.json']) {
+test('altered archived source, vendored crate, audio deployment configuration, helper checksum and dependency lock fail validation', () => {
+  for (const input of ['apps/bot/src/index.ts', 'apps/spotify-stream/vendor/hyper-proxy2/src/lib.rs', 'infra/lavalink/application.yml', 'bin/SHA256SUMS', 'package-lock.json']) {
     const f = fixture();
     try {
       const manifest = buildManifest(f.root), archive = archiveOf(f.directory, f.root, manifest);

@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import stat
 import subprocess
@@ -104,6 +105,7 @@ class SelfHostInstallTests(unittest.TestCase):
         self.release = self.directory / 'release'
         for name, contents in {
             'package.json': '{"type":"module"}', 'package-lock.json': '{}', 'apps/bot/src/index.ts': '// source',
+            'apps/spotify-stream/vendor/hyper-proxy2/src/lib.rs': '// vendored fixture',
             'dist/apps/bot/src/index.js': '// compiled fixture', 'dist/apps/bot/src/runtime/watchdog.js': '// watchdog',
             'dist/apps/bot/src/runtime/release-info.js': '// release info',
         }.items():
@@ -128,8 +130,8 @@ class SelfHostInstallTests(unittest.TestCase):
         self.config.write_text(json.dumps(self.settings)); self.config.chmod(0o600)
 
     def manifest(self):
-        names = ['package.json', 'package-lock.json', 'apps/bot/src/index.ts', 'deploy/audiobot.service',
-                 'deploy/50-audiobot-restart.rules', 'infra/lavalink/application.yml']
+        names = ['package.json', 'package-lock.json', 'apps/bot/src/index.ts', 'apps/spotify-stream/vendor/hyper-proxy2/src/lib.rs',
+                 'deploy/audiobot.service', 'deploy/50-audiobot-restart.rules', 'infra/lavalink/application.yml']
         digest = ''.join(name + '\0' + hashlib.sha256((self.release / name).read_bytes()).hexdigest() + '\n' for name in sorted(names))
         manifest = {'version': 1, 'revision': 'b' * 40, 'dirty': False, 'builtAt': '2026-09-12T00:00:00Z',
                     'dependencyHash': hashlib.sha256((self.release / 'package-lock.json').read_bytes()).hexdigest(),
@@ -201,12 +203,19 @@ class SelfHostInstallTests(unittest.TestCase):
         self.assertEqual(self.host.calls, [])
 
     def test_manifest_tamper_or_escaping_dependency_links_are_rejected_without_commands(self):
-        (self.release / 'apps/bot/src/index.ts').write_text('// modified after build')
-        with self.assertRaisesRegex(backend.SetupError, 'clean, complete'): self.install()
-        self.manifest()
+        for name in ('apps/bot/src/index.ts', 'apps/spotify-stream/vendor/hyper-proxy2/src/lib.rs'):
+            (self.release / name).write_text('// modified after build')
+            with self.assertRaisesRegex(backend.SetupError, 'clean, complete'): self.install()
+            self.manifest()
         (self.release / 'node_modules/escape').symlink_to(self.directory)
         with self.assertRaisesRegex(backend.SetupError, 'clean, complete'): self.install()
         self.assertEqual(self.host.calls, [])
+
+    def test_source_input_lists_match_the_release_manifest_script(self):
+        script = (REPO / 'scripts/release-manifest.mjs').read_text()
+        lists = {name: tuple(re.findall(r'"([^"]+)"', re.search(r'const %s = \[([^\]]*)\];' % name, script).group(1)))
+                 for name in ('rootFiles', 'directories')}
+        self.assertEqual(lists['rootFiles'], backend.ROOT_INPUTS); self.assertEqual(lists['directories'], backend.SOURCE_DIRS)
 
     def test_fresh_install_writes_private_secrets_root_tools_and_owned_fixed_services(self):
         result = self.install(); self.assertTrue(result['ready']); self.assertTrue(result['audioReady'])

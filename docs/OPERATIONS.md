@@ -82,7 +82,8 @@ the clean-revision check. Updating may interrupt playback for backup and again
 for activation; use an idle window and retain the printed backup identifier.
 
 After activation, run Doctor, inspect Status, and complete a short listening
-check. A failed transaction restores matching runtime, bot unit and database;
+check. If original Spotify audio is enabled, repeat its Sources step to rebuild
+the helper from the new revision; see [Spotify audio](SPOTIFY-DIRECT.md). A failed transaction restores matching runtime, bot unit and database;
 refreshed provider grants are kept separate from historical code/database state.
 
 ## Roll back deliberately

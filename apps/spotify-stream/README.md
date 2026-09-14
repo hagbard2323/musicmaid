@@ -37,3 +37,33 @@ MusicMaid's root MIT license does not relicense those dependencies.
 
 See [Spotify audio](../../docs/SPOTIFY-DIRECT.md) for pairing, validation,
 technical limits and recovery. Decoder checks do not prove audible Discord playback.
+
+## Vendored proxy connector
+
+librespot's HTTP client depends on `hyper-proxy2`. Its only published release,
+0.1.0, pins rustls 0.22, whose rustls-webpki 0.102 dependency carries open
+RustSec advisories (and rustls-pemfile 2.2, now unmaintained); upstream's update
+to hyper-rustls 0.27 is unreleased. `Cargo.toml`
+therefore patches `hyper-proxy2` to [vendor/hyper-proxy2](vendor/hyper-proxy2), a
+copy of <https://github.com/siketyan/hyper-proxy2> at commit
+`2a1a9845f4c9a100c45bf3dc0f1222773d5a33b7` with its
+[MIT license](vendor/hyper-proxy2/LICENSE-MIT.md) retained. `src/` is unchanged.
+The manifest differs from upstream in three ways: `tokio-rustls` and
+`hyper-rustls` are declared with default features off, and `rustls-base` enables
+`ring` on both plus `tls12` on `hyper-rustls`, so the helper keeps one rustls
+crypto provider; the unused optional dependencies `webpki` and
+`rustls-native-certs` are removed; the readme and `[dev-dependencies]` are
+dropped. The helper never configures a proxy, so this connector's TLS
+configuration is built but not used for traffic.
+
+To check provenance, compare `src/` against a fresh checkout of that commit from
+the repository root:
+
+```bash
+git clone https://github.com/siketyan/hyper-proxy2 ../hyper-proxy2-upstream
+git -C ../hyper-proxy2-upstream checkout 2a1a9845f4c9a100c45bf3dc0f1222773d5a33b7
+diff -r ../hyper-proxy2-upstream/src apps/spotify-stream/vendor/hyper-proxy2/src
+```
+
+Remove the copy when upstream publishes a release on hyper-rustls 0.27 or the
+pinned librespot stops depending on `hyper-proxy2`.
