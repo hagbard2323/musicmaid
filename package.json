@@ -23,7 +23,7 @@
     "shoukaku": "^4.1.1"
   },
   "devDependencies": {
-    "@types/node": "^22.13.0",
+    "@types/node": "^22.20.2",
     "esbuild": "0.28.2",
     "tsx": "^4.23.13",
     "typescript": "^5.7.3",
