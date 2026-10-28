@@ -1,5 +1,5 @@
 # Default runtime dependencies from the successful authenticated server checks.
-brotli==1.2.0
+brotli==1.2.1
 certifi==2026.7.22
 charset-normalizer==3.5.1
 idna==3.19
